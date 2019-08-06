@@ -1,7 +1,7 @@
 #include "grid.h"
 #include "ant.h"
 #include "doodlebug.h"
-#include "menu.h"
+#include "declaration.h"
 
 Organism*** createGrid()
 {
@@ -60,4 +60,81 @@ void displayGrid(Organism*** grid)
 		cout << endl;
 	}
 
+}
+
+void resetMove(Organism*** grid)
+{
+	for (int row = 0; row < DIMENSION; row++)
+	{
+		for (int col = 0; col < DIMENSION; col++)
+		{
+			if (grid[row][col] != NULL) // checks for critters in position
+				grid[row][col]->set_movedStep(false); // reset moved to false
+		}
+	}
+}
+
+void DoodleTurn(Organism*** grid)
+{
+	// Movement Phase
+	for (int row = 0; row < DIMENSION; row++)
+	{
+		for (int col = 0; col < DIMENSION; col++)
+		{
+			if (grid[row][col]->getType() == DOODLEBUG)
+			{
+				if (grid[row][col]->get_movedStep() == false)
+					grid[row][col]->move(grid);
+			}
+		}
+	}
+
+	// Breeding Phase
+	for (int row = 0; row < DIMENSION; row++)
+	{
+		for (int col = 0; col < DIMENSION; col++)
+		{
+			if (grid[row][col]->getType() == DOODLEBUG)
+					grid[row][col]->breed(grid);
+		}
+	}
+}
+
+void AntTurn(Organism*** grid)
+{
+	// Movement Phase
+	for (int row = 0; row < DIMENSION; row++)
+	{
+		for (int col = 0; col < DIMENSION; col++)
+		{
+			if (grid[row][col]->getType() == ANT)
+			{
+				if (grid[row][col]->get_movedStep() == false)
+					grid[row][col]->move(grid);
+			}
+		}
+	}
+
+	// Breeding Phase
+	for (int row = 0; row < DIMENSION; row++)
+	{
+		for (int col = 0; col < DIMENSION; col++)
+		{
+			if (grid[row][col]->getType() == ANT)
+				grid[row][col]->breed(grid);
+		}
+	}
+}
+
+void deleteGrid(Organism*** grid)
+{
+	for (int row = 0; row < DIMENSION; row++)
+	{
+		for (int col = 0; col < DIMENSION; col++)
+		{
+			delete grid[row][col]; // deleting independent objects
+		}
+		delete[] grid[row]; // deleting dynamically allocated array
+	}
+	delete[] grid; // deleting entire grid
 }
