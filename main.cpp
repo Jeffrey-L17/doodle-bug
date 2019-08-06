@@ -15,6 +15,7 @@ int main()
 
 	char input;
 	cin.get(input);
+
 	while (input == '\n')
 	{
 		resetMove(test);
@@ -24,7 +25,7 @@ int main()
 		cin.get(input);
 	}
 
-
+	// deleteGrid(test);
 	system("pause");
 	return 0;
 }

@@ -59,7 +59,7 @@ void displayGrid(Organism*** grid)
 		}
 		cout << endl;
 	}
-
+	cout << endl;
 }
 
 void resetMove(Organism*** grid)
@@ -81,10 +81,13 @@ void DoodleTurn(Organism*** grid)
 	{
 		for (int col = 0; col < DIMENSION; col++)
 		{
-			if (grid[row][col]->getType() == DOODLEBUG)
+			if (grid[row][col] != NULL)
 			{
-				if (grid[row][col]->get_movedStep() == false)
-					grid[row][col]->move(grid);
+				if (grid[row][col]->getType() == DOODLEBUG)
+				{
+					if (grid[row][col]->get_movedStep() == false)
+						grid[row][col]->move(grid);
+				}
 			}
 		}
 	}
@@ -94,9 +97,13 @@ void DoodleTurn(Organism*** grid)
 	{
 		for (int col = 0; col < DIMENSION; col++)
 		{
-			if (grid[row][col]->getType() == DOODLEBUG)
+			if (grid[row][col] != NULL)
+			{
+				if (grid[row][col]->getType() == DOODLEBUG)
 					grid[row][col]->breed(grid);
+			}
 		}
+			
 	}
 }
 
@@ -107,10 +114,13 @@ void AntTurn(Organism*** grid)
 	{
 		for (int col = 0; col < DIMENSION; col++)
 		{
-			if (grid[row][col]->getType() == ANT)
+			if (grid[row][col] != NULL)
 			{
-				if (grid[row][col]->get_movedStep() == false)
-					grid[row][col]->move(grid);
+				if (grid[row][col]->getType() == ANT)
+				{
+					if (grid[row][col]->get_movedStep() == false)
+						grid[row][col]->move(grid);
+				}
 			}
 		}
 	}
@@ -120,8 +130,11 @@ void AntTurn(Organism*** grid)
 	{
 		for (int col = 0; col < DIMENSION; col++)
 		{
-			if (grid[row][col]->getType() == ANT)
-				grid[row][col]->breed(grid);
+			if (grid[row][col] != NULL)
+			{
+				if (grid[row][col]->getType() == ANT)
+					grid[row][col]->breed(grid);
+			}
 		}
 	}
 }
@@ -137,4 +150,5 @@ void deleteGrid(Organism*** grid)
 		delete[] grid[row]; // deleting dynamically allocated array
 	}
 	delete[] grid; // deleting entire grid
+	grid = NULL;
 }

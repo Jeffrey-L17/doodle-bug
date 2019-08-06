@@ -31,7 +31,7 @@ void Ant::move(Organism*** grid)
 			int checkUp = 1;
 			if (getRow() - 1 != -1)
 			{
-				if (grid[getRow() - 1][getCol()]->getType() == NULL)
+				if (grid[getRow() - 1][getCol()] == NULL)
 				{
 					spotFound = true; 
 					grid[getRow() - 1][getCol()] = this;
@@ -46,7 +46,7 @@ void Ant::move(Organism*** grid)
 			int checkRight = 1;
 			if (getCol() + 1 != 20)
 			{
-				if (grid[getRow()][getCol() + 1]->getType() == NULL)
+				if (grid[getRow()][getCol() + 1] == NULL)
 				{
 					spotFound = true;
 					grid[getRow()][getCol() + 1] = this;
@@ -61,7 +61,7 @@ void Ant::move(Organism*** grid)
 			int checkDown = 1;
 			if (getRow() + 1 != 20)
 			{
-				if (grid[getRow() + 1][getCol()]->getType() == NULL)
+				if (grid[getRow() + 1][getCol()] == NULL)
 				{
 					spotFound = true;
 					grid[getRow() + 1][getCol()] = this;
@@ -76,7 +76,7 @@ void Ant::move(Organism*** grid)
 			int checkLeft = 1;
 			if (getCol() - 1 != -1)
 			{
-				if (grid[getRow()][getCol() - 1]->getType() == NULL)
+				if (grid[getRow()][getCol() - 1] == NULL)
 				{
 					spotFound = true;
 					grid[getRow()][getCol() - 1] = this;
@@ -107,7 +107,7 @@ void Ant::breed(Organism*** grid)
 				int checkUp = 1;
 				if (getRow() - 1 != -1)
 				{
-					if (grid[getRow() - 1][getCol()]->getType() == NULL)
+					if (grid[getRow() - 1][getCol()] == NULL)
 					{
 						spotFound = true;
 						grid[getRow() - 1][getCol()] = new Ant(getRow() - 1, getCol());
@@ -121,7 +121,7 @@ void Ant::breed(Organism*** grid)
 				int checkRight = 1;
 				if (getCol() + 1 != 20)
 				{
-					if (grid[getRow()][getCol() + 1]->getType() == NULL)
+					if (grid[getRow()][getCol() + 1] == NULL)
 					{
 						spotFound = true;
 						grid[getRow()][getCol() + 1] = new Ant(getRow(), getCol() + 1);
@@ -135,7 +135,7 @@ void Ant::breed(Organism*** grid)
 				int checkDown = 1;
 				if (getRow() + 1 != 20)
 				{
-					if (grid[getRow() + 1][getCol()]->getType() == NULL)
+					if (grid[getRow() + 1][getCol()] == NULL)
 					{
 						spotFound = true;
 						grid[getRow() + 1][getCol()] = new Ant(getRow() + 1, getCol());
@@ -149,7 +149,7 @@ void Ant::breed(Organism*** grid)
 				int checkLeft = 1;
 				if (getCol() - 1 != -1)
 				{
-					if (grid[getRow()][getCol() - 1]->getType() == NULL)
+					if (grid[getRow()][getCol() - 1] == NULL)
 					{
 						spotFound = true;
 						grid[getRow()][getCol() - 1] = new Ant(getRow(), getCol() - 1);

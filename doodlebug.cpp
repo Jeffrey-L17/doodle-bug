@@ -42,14 +42,17 @@ void Doodlebug::move(Organism*** grid)
 			int checkUp = 1;
 			if (getRow() - 1 != -1) // prevent looping around grid
 			{
-				if (grid[getRow() - 1][getCol()]->getType() == ANT)
+				if (grid[getRow() - 1][getCol()] != NULL)
 				{
-					foodFound = true; // stops the check for food
-					delete grid[getRow() - 1][getCol()]; // delete the ant
-					grid[getRow() - 1][getCol()] = this; // replace ant's original position with 'this' doodlebug instance
-					grid[getRow()][getCol()] = NULL; // set doodlebug's original position to NULL to empty it out
-					setRow(getRow() - 1); // assign new position to this doodlebug
-					set_timeStarve(0); // reset starvation period
+					if (grid[getRow() - 1][getCol()]->getType() == ANT)
+					{
+						foodFound = true; // stops the check for food
+						delete grid[getRow() - 1][getCol()]; // delete the ant
+						grid[getRow() - 1][getCol()] = this; // replace ant's original position with 'this' doodlebug instance
+						grid[getRow()][getCol()] = NULL; // set doodlebug's original position to NULL to empty it out
+						setRow(getRow() - 1); // assign new position to this doodlebug
+						set_timeStarve(0); // reset starvation period
+					}
 				}
 			}
 		}
@@ -59,14 +62,17 @@ void Doodlebug::move(Organism*** grid)
 			int checkRight = 1;
 			if (getCol() + 1 != 20) 
 			{
-				if (grid[getRow()][getCol() + 1]->getType() == ANT)
+				if (grid[getRow()][getCol() + 1] != NULL)
 				{
-					foodFound = true;
-					delete grid[getRow()][getCol() + 1];
-					grid[getRow()][getCol() + 1] = this; 
-					grid[getRow()][getCol()] = NULL;
-					setCol(getCol() + 1);
-					set_timeStarve(0);
+					if (grid[getRow()][getCol() + 1]->getType() == ANT)
+					{
+						foodFound = true;
+						delete grid[getRow()][getCol() + 1];
+						grid[getRow()][getCol() + 1] = this;
+						grid[getRow()][getCol()] = NULL;
+						setCol(getCol() + 1);
+						set_timeStarve(0);
+					}
 				}
 			}
 		}
@@ -76,14 +82,17 @@ void Doodlebug::move(Organism*** grid)
 			int checkDown = 1;
 			if (getRow() + 1 != 20)
 			{
-				if (grid[getRow() + 1][getCol()]->getType() == ANT)
+				if (grid[getRow() + 1][getCol()] != NULL)
 				{
-					foodFound = true;
-					delete grid[getRow() + 1][getCol()];
-					grid[getRow() + 1][getCol()] = this;
-					grid[getRow()][getCol()] = NULL;
-					setRow(getRow() + 1);
-					set_timeStarve(0);
+					if (grid[getRow() + 1][getCol()]->getType() == ANT)
+					{
+						foodFound = true;
+						delete grid[getRow() + 1][getCol()];
+						grid[getRow() + 1][getCol()] = this;
+						grid[getRow()][getCol()] = NULL;
+						setRow(getRow() + 1);
+						set_timeStarve(0);
+					}
 				}
 			}
 		}
@@ -93,14 +102,17 @@ void Doodlebug::move(Organism*** grid)
 			int checkLeft = 1;
 			if (getCol() - 1 != -1)
 			{
-				if (grid[getRow()][getCol() - 1]->getType() == ANT)
+				if (grid[getRow()][getCol() - 1] != NULL)
 				{
-					foodFound = true;
-					delete grid[getRow()][getCol() - 1];
-					grid[getRow()][getCol() - 1] = this;
-					grid[getRow()][getCol()] = NULL;
-					setCol(getCol() - 1);
-					set_timeStarve(0);
+					if (grid[getRow()][getCol() - 1]->getType() == ANT)
+					{
+						foodFound = true;
+						delete grid[getRow()][getCol() - 1];
+						grid[getRow()][getCol() - 1] = this;
+						grid[getRow()][getCol()] = NULL;
+						setCol(getCol() - 1);
+						set_timeStarve(0);
+					}
 				}
 			}
 		}
@@ -121,7 +133,7 @@ void Doodlebug::move(Organism*** grid)
 			int checkUp = 1;
 			if (getRow() - 1 != -1) // prevent looping around grid
 			{
-				if (grid[getRow() - 1][getCol()]->getType() == NULL)
+				if (grid[getRow() - 1][getCol()] == NULL)
 				{
 					foodFound = true; // stops the check for empty spot
 					grid[getRow() - 1][getCol()] = this; // replace new empty spot with 'this' doodlebug instance
@@ -136,7 +148,7 @@ void Doodlebug::move(Organism*** grid)
 			int checkRight = 1;
 			if (getCol() + 1 != 20)
 			{
-				if (grid[getRow()][getCol() + 1]->getType() == NULL)
+				if (grid[getRow()][getCol() + 1] == NULL)
 				{
 					foodFound = true;
 					grid[getRow()][getCol() + 1] = this;
@@ -151,7 +163,7 @@ void Doodlebug::move(Organism*** grid)
 			int checkDown = 1;
 			if (getRow() + 1 != 20)
 			{
-				if (grid[getRow() + 1][getCol()]->getType() == NULL)
+				if (grid[getRow() + 1][getCol()] == NULL)
 				{
 					foodFound = true;
 					grid[getRow() + 1][getCol()] = this;
@@ -166,7 +178,7 @@ void Doodlebug::move(Organism*** grid)
 			int checkLeft = 1;
 			if (getCol() - 1 != -1)
 			{
-				if (grid[getRow()][getCol() - 1]->getType() == NULL)
+				if (grid[getRow()][getCol() - 1] == NULL)
 				{
 					foodFound = true;
 					grid[getRow()][getCol() - 1] = this;
@@ -204,7 +216,7 @@ void Doodlebug::breed(Organism*** grid)
 				int checkUp = 1;
 				if (getRow() - 1 != -1) // prevent looping around grid
 				{
-					if (grid[getRow() - 1][getCol()]->getType() == NULL)
+					if (grid[getRow() - 1][getCol()] == NULL)
 					{
 						spotFound = true; // stops the check for empty spot
 						grid[getRow() - 1][getCol()] = new Doodlebug(getRow() - 1, getCol()); // replace new empty spot with 'this' doodlebug instance
@@ -218,7 +230,7 @@ void Doodlebug::breed(Organism*** grid)
 				int checkRight = 1;
 				if (getCol() + 1 != 20)
 				{
-					if (grid[getRow()][getCol() + 1]->getType() == NULL)
+					if (grid[getRow()][getCol() + 1] == NULL)
 					{
 						spotFound = true;
 						grid[getRow()][getCol() + 1] = new Doodlebug(getRow(), getCol() + 1);
@@ -232,7 +244,7 @@ void Doodlebug::breed(Organism*** grid)
 				int checkDown = 1;
 				if (getRow() + 1 != 20)
 				{
-					if (grid[getRow() + 1][getCol()]->getType() == NULL)
+					if (grid[getRow() + 1][getCol()] == NULL)
 					{
 						spotFound = true;
 						grid[getRow() + 1][getCol()] = new Doodlebug(getRow() + 1, getCol());
@@ -246,7 +258,7 @@ void Doodlebug::breed(Organism*** grid)
 				int checkLeft = 1;
 				if (getCol() - 1 != -1)
 				{
-					if (grid[getRow()][getCol() - 1]->getType() == NULL)
+					if (grid[getRow()][getCol() - 1] == NULL)
 					{
 						spotFound = true;
 						grid[getRow()][getCol() - 1] = new Doodlebug(getRow(), getCol() - 1);

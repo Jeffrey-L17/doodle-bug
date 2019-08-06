@@ -22,8 +22,8 @@ public:
 	int getRow(); // needed to prevent looping grid row-wise
 	void setCol(int);
 	int getCol(); // needed to prevent looping grid column-wise
-	void setType(bugType);
-	bugType getType();
+	void setType(bugType); // assigns critter as ant or doodlebug
+	bugType getType(); //obtains critter type
 
 	void set_timeSteps(int); // important to keep track of breeding period
 	int get_timeSteps();

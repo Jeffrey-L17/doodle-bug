@@ -9,10 +9,10 @@ using namespace std;
 #define MENU_H
 
 // World Size
-const int DIMENSION = 10;
+const int DIMENSION = 20;
 
 // initial bug counts
-const int init_ANT = 50;
+const int init_ANT = 100;
 const int init_DOODLEBUG = 5;
 
 #endif
