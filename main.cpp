@@ -13,7 +13,12 @@ int main()
 	randomizeGrid(test);
 	displayGrid(test);
 
-	char input;
+	resetMove(test);
+	DoodleTurn(test);
+	AntTurn(test);
+	displayGrid(test);
+
+	/*char input;
 	cin.get(input);
 
 	while (input == '\n')
@@ -23,8 +28,8 @@ int main()
 		AntTurn(test);
 		displayGrid(test);
 		cin.get(input);
-	}
-
+	}*/
+	
 	// deleteGrid(test);
 	system("pause");
 	return 0;

@@ -28,7 +28,7 @@ void Ant::move(Organism*** grid)
 
 		if (check == UP && checkUp == 0)
 		{
-			int checkUp = 1;
+			checkUp = 1;
 			if (getRow() - 1 != -1)
 			{
 				if (grid[getRow() - 1][getCol()] == NULL)
@@ -43,7 +43,7 @@ void Ant::move(Organism*** grid)
 
 		else if (check == RIGHT && checkRight == 0)
 		{
-			int checkRight = 1;
+			checkRight = 1;
 			if (getCol() + 1 != 20)
 			{
 				if (grid[getRow()][getCol() + 1] == NULL)
@@ -58,7 +58,7 @@ void Ant::move(Organism*** grid)
 
 		else if (check == DOWN && checkDown == 0)
 		{
-			int checkDown = 1;
+			checkDown = 1;
 			if (getRow() + 1 != 20)
 			{
 				if (grid[getRow() + 1][getCol()] == NULL)
@@ -73,7 +73,7 @@ void Ant::move(Organism*** grid)
 
 		else if (check == LEFT && checkLeft == 0)
 		{
-			int checkLeft = 1;
+			checkLeft = 1;
 			if (getCol() - 1 != -1)
 			{
 				if (grid[getRow()][getCol() - 1] == NULL)
@@ -104,7 +104,7 @@ void Ant::breed(Organism*** grid)
 
 			if (check == UP && checkUp == 0)
 			{
-				int checkUp = 1;
+				checkUp = 1;
 				if (getRow() - 1 != -1)
 				{
 					if (grid[getRow() - 1][getCol()] == NULL)
@@ -118,7 +118,7 @@ void Ant::breed(Organism*** grid)
 
 			else if (check == RIGHT && checkRight == 0)
 			{
-				int checkRight = 1;
+				checkRight = 1;
 				if (getCol() + 1 != 20)
 				{
 					if (grid[getRow()][getCol() + 1] == NULL)
@@ -132,7 +132,7 @@ void Ant::breed(Organism*** grid)
 
 			else if (check == DOWN && checkDown == 0)
 			{
-				int checkDown = 1;
+				checkDown = 1;
 				if (getRow() + 1 != 20)
 				{
 					if (grid[getRow() + 1][getCol()] == NULL)
@@ -146,7 +146,7 @@ void Ant::breed(Organism*** grid)
 
 			else if (check == LEFT && checkLeft == 0)
 			{
-				int checkLeft = 1;
+				checkLeft = 1;
 				if (getCol() - 1 != -1)
 				{
 					if (grid[getRow()][getCol() - 1] == NULL)
