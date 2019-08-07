@@ -15,12 +15,12 @@ Doodlebug::Doodlebug(int row, int col)
 
 void Doodlebug::set_timeStarve(int t)
 {
-	timeStarve = t;
+	timeStarve = t; // needed later to increment or reset starvation period
 }
 
 int Doodlebug::get_timeStarve()
 {
-	return timeStarve;
+	return timeStarve; // needed later to check status of starvation period
 }
 
 void Doodlebug::move(Organism*** grid)
@@ -28,16 +28,16 @@ void Doodlebug::move(Organism*** grid)
 	set_timeSteps(get_timeSteps() + 1); // grabs timeSteps and increments it to indicate survival period
 	set_movedStep(true); // prevents moving more than once per turn
 
-	bool foodFound = false; // can also be considered positionFound
-	int num_check = 0;
+	bool spotFound = false; // stops loop if ant is eaten
+	int num_check = 0; // or if all 4 directions are checked
 	int checkUp = 0, checkRight = 0, checkDown = 0, checkLeft = 0;
 	direction check;
 
-	while (foodFound == false && num_check != 4)
+	while (!spotFound && num_check < 4)
 	{
 		check = static_cast<direction>(rand() % 4);
 
-		if (check == UP && checkUp == 0)
+		if (check == UP && !checkUp)
 		{
 			checkUp = 1;
 			if (getRow() - 1 != -1) // prevent looping around grid
@@ -46,7 +46,7 @@ void Doodlebug::move(Organism*** grid)
 				{											// would generate error on NULL space
 					if (grid[getRow() - 1][getCol()]->getType() == ANT)
 					{
-						foodFound = true; // stops the check for food
+						spotFound = true; // stops the check for food
 						delete grid[getRow() - 1][getCol()]; // delete the ant
 						grid[getRow() - 1][getCol()] = this; // copy ant's original position with 'this' doodlebug instance
 						grid[getRow()][getCol()] = NULL; // set doodlebug's original position to NULL to empty it out
@@ -57,7 +57,7 @@ void Doodlebug::move(Organism*** grid)
 			}
 		}
 
-		else if (check == RIGHT && checkRight == 0)
+		else if (check == RIGHT && !checkRight)
 		{
 			checkRight = 1;
 			if (getCol() + 1 != 20) 
@@ -66,7 +66,7 @@ void Doodlebug::move(Organism*** grid)
 				{
 					if (grid[getRow()][getCol() + 1]->getType() == ANT)
 					{
-						foodFound = true;
+						spotFound = true;
 						delete grid[getRow()][getCol() + 1];
 						grid[getRow()][getCol() + 1] = this;
 						grid[getRow()][getCol()] = NULL;
@@ -77,7 +77,7 @@ void Doodlebug::move(Organism*** grid)
 			}
 		}
 
-		else if (check == DOWN && checkDown == 0)
+		else if (check == DOWN && !checkDown)
 		{
 			checkDown = 1;
 			if (getRow() + 1 != 20)
@@ -86,7 +86,7 @@ void Doodlebug::move(Organism*** grid)
 				{
 					if (grid[getRow() + 1][getCol()]->getType() == ANT)
 					{
-						foodFound = true;
+						spotFound = true;
 						delete grid[getRow() + 1][getCol()];
 						grid[getRow() + 1][getCol()] = this;
 						grid[getRow()][getCol()] = NULL;
@@ -97,7 +97,7 @@ void Doodlebug::move(Organism*** grid)
 			}
 		}
 
-		else if (check == LEFT && checkLeft == 0)
+		else if (check == LEFT && !checkLeft)
 		{
 			checkLeft = 1;
 			if (getCol() - 1 != -1)
@@ -106,7 +106,7 @@ void Doodlebug::move(Organism*** grid)
 				{
 					if (grid[getRow()][getCol() - 1]->getType() == ANT)
 					{
-						foodFound = true;
+						spotFound = true;
 						delete grid[getRow()][getCol() - 1];
 						grid[getRow()][getCol() - 1] = this;
 						grid[getRow()][getCol()] = NULL;
@@ -117,24 +117,25 @@ void Doodlebug::move(Organism*** grid)
 			}
 		}
 		num_check = checkUp + checkRight + checkDown + checkLeft; // stops loop if all 4 directions are checked
-	}
-
+	} 
+	
 	num_check = 0; // reset check values
 	checkUp = 0, checkRight = 0, checkDown = 0, checkLeft = 0;
-	if (foodFound == false)
+	
+	if (!spotFound)
 		set_timeStarve(get_timeStarve() + 1); // increment starvation period
 
-	while (foodFound == false && num_check != 4)
+	while (!spotFound && num_check != 4)
 	{
 		check = static_cast<direction>(rand() % 4);
-		if (check == UP && checkUp == 0)
+		if (check == UP && !checkUp)
 		{
 			checkUp = 1;
 			if (getRow() - 1 != -1) // prevent looping around grid
 			{
 				if (grid[getRow() - 1][getCol()] == NULL)
 				{
-					foodFound = true; // stops the check for empty spot
+					spotFound = true; // stops the check for empty spot
 					grid[getRow() - 1][getCol()] = this; // replace new empty spot with 'this' doodlebug instance
 					grid[getRow()][getCol()] = NULL; // set doodlebug's original position to NULL to empty it out
 					setRow(getRow() - 1); // assign new position to this doodlebug
@@ -142,14 +143,14 @@ void Doodlebug::move(Organism*** grid)
 			}
 		}
 
-		else if (check == RIGHT && checkRight == 0)
+		else if (check == RIGHT && !checkRight)
 		{
 			checkRight = 1;
 			if (getCol() + 1 != 20)
 			{
 				if (grid[getRow()][getCol() + 1] == NULL)
 				{
-					foodFound = true;
+					spotFound = true;
 					grid[getRow()][getCol() + 1] = this;
 					grid[getRow()][getCol()] = NULL;
 					setCol(getCol() + 1);
@@ -157,14 +158,14 @@ void Doodlebug::move(Organism*** grid)
 			}
 		}
 
-		else if (check == DOWN && checkDown == 0)
+		else if (check == DOWN && !checkDown)
 		{
 			checkDown = 1;
 			if (getRow() + 1 != 20)
 			{
 				if (grid[getRow() + 1][getCol()] == NULL)
 				{
-					foodFound = true;
+					spotFound = true;
 					grid[getRow() + 1][getCol()] = this;
 					grid[getRow()][getCol()] = NULL;
 					setRow(getRow() + 1);
@@ -172,14 +173,14 @@ void Doodlebug::move(Organism*** grid)
 			}
 		}
 
-		else if (check == LEFT && checkLeft == 0)
+		else if (check == LEFT && !checkLeft)
 		{
 			checkLeft = 1;
 			if (getCol() - 1 != -1)
 			{
 				if (grid[getRow()][getCol() - 1] == NULL)
 				{
-					foodFound = true;
+					spotFound = true;
 					grid[getRow()][getCol() - 1] = this;
 					grid[getRow()][getCol()] = NULL;
 					setCol(getCol() - 1);
@@ -188,14 +189,15 @@ void Doodlebug::move(Organism*** grid)
 		}
 		num_check = checkUp + checkRight + checkDown + checkLeft;
 	}
-
+	
 	// deletes doodlebug if it hasn't eaten in three turns
-	if (get_timeStarve() >= 3)
+	if (get_timeStarve() >= DOODLEBUG_survivalTime)
 	{
+		int row = getRow(), col = getCol(); // necessary because deleting object also deletes its member function
 		delete grid[getRow()][getCol()];
-		grid[getRow()][getCol()] = NULL;
-	}
-}
+		grid[row][col] = NULL;
+	} 
+} 
 
 void Doodlebug::breed(Organism*** grid)
 {
@@ -204,13 +206,13 @@ void Doodlebug::breed(Organism*** grid)
 	int checkUp = 0, checkRight = 0, checkDown = 0, checkLeft = 0;
 	direction check;
 
-	if (get_timeSteps() >= 8)
+	if (get_timeSteps() >= DOODLEBUG_breedTime)
 	{
-		while (spotFound == false && num_check != 4)
+		while (!spotFound && num_check != 4)
 		{
 			check = static_cast<direction>(rand() % 4);
 
-			if (check == UP && checkUp == 0)
+			if (check == UP && !checkUp)
 			{
 				checkUp = 1;
 				if (getRow() - 1 != -1) // prevent looping around grid
@@ -224,7 +226,7 @@ void Doodlebug::breed(Organism*** grid)
 				}
 			}
 
-			else if (check == RIGHT && checkRight == 0)
+			else if (check == RIGHT && !checkRight)
 			{
 				checkRight = 1;
 				if (getCol() + 1 != 20)
@@ -238,7 +240,7 @@ void Doodlebug::breed(Organism*** grid)
 				}
 			}
 
-			else if (check == DOWN && checkDown == 0)
+			else if (check == DOWN && !checkDown)
 			{
 				checkDown = 1;
 				if (getRow() + 1 != 20)
@@ -252,7 +254,7 @@ void Doodlebug::breed(Organism*** grid)
 				}
 			}
 
-			else if (check == LEFT && checkLeft == 0)
+			else if (check == LEFT && !checkLeft)
 			{
 				checkLeft = 1;
 				if (getCol() - 1 != -1)

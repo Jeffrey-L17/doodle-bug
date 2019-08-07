@@ -3,7 +3,7 @@
 
 #include "organism.h"
 
-class Doodlebug : public Organism
+class Doodlebug : public Organism // derived class
 {
 private:
 	int timeStarve; // time step counter to keep track of doodlebug starvation period
@@ -14,8 +14,8 @@ public:
 	void set_timeStarve(int);
 	int get_timeStarve();
 
-	void virtual move(Organism***); // virtual included to allow separate move function based on class
-	void virtual breed(Organism***); // likewise
+	void move(Organism***);
+	void breed(Organism***); 
 };
 
 #endif

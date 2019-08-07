@@ -22,11 +22,11 @@ void Ant::move(Organism*** grid)
 	int checkUp = 0, checkRight = 0, checkDown = 0, checkLeft = 0;
 	direction check;
 
-	while (spotFound == false && num_check != 4)
+	while (!spotFound && num_check != 4)
 	{
 		check = static_cast<direction>(rand() % 4);
 
-		if (check == UP && checkUp == 0)
+		if (check == UP && !checkUp)
 		{
 			checkUp = 1;
 			if (getRow() - 1 != -1)
@@ -41,7 +41,7 @@ void Ant::move(Organism*** grid)
 			}
 		}
 
-		else if (check == RIGHT && checkRight == 0)
+		else if (check == RIGHT && !checkRight)
 		{
 			checkRight = 1;
 			if (getCol() + 1 != 20)
@@ -56,7 +56,7 @@ void Ant::move(Organism*** grid)
 			}
 		}
 
-		else if (check == DOWN && checkDown == 0)
+		else if (check == DOWN && !checkDown)
 		{
 			checkDown = 1;
 			if (getRow() + 1 != 20)
@@ -71,7 +71,7 @@ void Ant::move(Organism*** grid)
 			}
 		}
 
-		else if (check == LEFT && checkLeft == 0)
+		else if (check == LEFT && !checkLeft)
 		{
 			checkLeft = 1;
 			if (getCol() - 1 != -1)
@@ -96,13 +96,13 @@ void Ant::breed(Organism*** grid)
 	int checkUp = 0, checkRight = 0, checkDown = 0, checkLeft = 0;
 	direction check;
 
-	if (get_timeSteps() >= 3)
+	if (get_timeSteps() >= ANT_breedTime)
 	{
-		while (spotFound == false && num_check != 4)
+		while (!spotFound && num_check != 4)
 		{
 			check = static_cast<direction>(rand() % 4);
 
-			if (check == UP && checkUp == 0)
+			if (check == UP && !checkUp)
 			{
 				checkUp = 1;
 				if (getRow() - 1 != -1)
@@ -116,7 +116,7 @@ void Ant::breed(Organism*** grid)
 				}
 			}
 
-			else if (check == RIGHT && checkRight == 0)
+			else if (check == RIGHT && !checkRight)
 			{
 				checkRight = 1;
 				if (getCol() + 1 != 20)
@@ -130,7 +130,7 @@ void Ant::breed(Organism*** grid)
 				}
 			}
 
-			else if (check == DOWN && checkDown == 0)
+			else if (check == DOWN && !checkDown)
 			{
 				checkDown = 1;
 				if (getRow() + 1 != 20)
@@ -144,7 +144,7 @@ void Ant::breed(Organism*** grid)
 				}
 			}
 
-			else if (check == LEFT && checkLeft == 0)
+			else if (check == LEFT && !checkLeft)
 			{
 				checkLeft = 1;
 				if (getCol() - 1 != -1)

@@ -59,10 +59,12 @@ bool Organism::get_movedStep()
 
 void Organism::move(Organism***)
 {
-// left blank as there will only be virtual move functions for each critter type
+	cout << "ERROR "; // should not resort to Organism move function, have
+					// to use virtual function from doodlebug or ant
 }
 
 void Organism::breed(Organism***)
 {
-// left blank as there will only be virtual breed functions for each critter type
+	cout << "ERROR "; // should not resort to Organism breed function, have
+					// to use virtual function from doodlebug or ant
 }

@@ -13,8 +13,8 @@ class Ant : public Organism
 public:
 	Ant(int, int); //default constructor to set row and column
 
-	void virtual move(Organism***);
-	void virtual breed(Organism***);
+	void move(Organism***);
+	void breed(Organism***);
 };
 
 #endif

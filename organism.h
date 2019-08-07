@@ -31,8 +31,8 @@ public:
 	void set_movedStep(bool); // important to keep track of which critters moved because it could...
 	bool get_movedStep(); // move to a latter part of the array and move again repeatedly
 	
-	void move(Organism***);
-	void breed(Organism***);
+	virtual void move(Organism***); // virtual function to ensure member's version of the function.. 
+	virtual void breed(Organism***); // gets executed instead
 
 };
 

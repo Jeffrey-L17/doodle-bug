@@ -8,12 +8,12 @@ Organism*** createGrid()
 	Organism*** grid;
 	grid = new Organism**[DIMENSION]; //create dynamic array of pointers to Organism type
 
-	for (int i = 0; i < DIMENSION; i++)
-		grid[i] = new Organism*[DIMENSION]; // make each pointer in the grid point to dynamic
+	for (int row = 0; row < DIMENSION; row++)
+		grid[row] = new Organism*[DIMENSION]; // make each pointer in the grid point to dynamic
 											// array of actual Organism values
-	for (int i = 0; i < DIMENSION; i++)
-		for (int j = 0; j < DIMENSION; j++)
-			grid[i][j] = NULL; // Traversing the array and populating it with NULL values
+	for (int row = 0; row < DIMENSION; row++)
+		for (int col = 0; col < DIMENSION; col++)
+			grid[row][col] = NULL; // Traversing the array and populating it with NULL values
 
 	return grid;
 }
@@ -50,6 +50,7 @@ void displayGrid(Organism*** grid)
 	{
 		for (int col = 0; col < DIMENSION; col++)
 		{
+			cout << " ";
 			if (grid[row][col] == NULL)
 				cout << "-";
 			else if (grid[row][col]->getType() == ANT)
@@ -60,6 +61,36 @@ void displayGrid(Organism*** grid)
 		cout << endl;
 	}
 	cout << endl;
+}
+
+int doodleCount(Organism*** grid)
+{
+	int p = 0;
+	for (int row = 0; row < DIMENSION; row++)
+	{
+		for (int col = 0; col < DIMENSION; col++)
+		{
+			if (grid[row][col] != NULL) // 
+				if (grid[row][col]->getType() == DOODLEBUG)
+					p++;
+		}
+	}
+	return p;
+}
+
+int antCount(Organism*** grid)
+{
+	int p = 0;
+	for (int row = 0; row < DIMENSION; row++)
+	{
+		for (int col = 0; col < DIMENSION; col++)
+		{
+			if (grid[row][col] != NULL) // 
+				if (grid[row][col]->getType() == ANT)
+					p++;
+		}
+	}
+	return p;
 }
 
 void resetMove(Organism*** grid)
